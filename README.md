@@ -103,3 +103,5 @@ Once the window is closed, resources (VAO, VBO, shader program) are deleted, and
 ## Conclusion
 
 This program demonstrates the basics of OpenGL, including setting up a rendering context, creating shaders, handling user input, and rendering geometric shapes. It can be extended further to add more complex shapes, animations, or interactions.
+
+Learn More about [Lab 01](Lab01/TEACHME.md)
