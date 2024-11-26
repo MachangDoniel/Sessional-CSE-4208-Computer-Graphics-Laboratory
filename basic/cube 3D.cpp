@@ -26,16 +26,16 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
 // draw object functions
-void drawCube(Shader shaderProgram, unsigned int VAO, glm::mat4 parentTrans, float posX = 0.0, float posY = 0.0, float posz = 0.0, float rotX = 0.0, float rotY = 0.0, float rotZ = 0.0, float scX = 1.0, float scY = 1.0, float scZ = 1.0);
+void drawCube(Shader shaderProgram, unsigned int VAO, glm::mat4 parentTrans, float posX = 0.0, float posY = 0.0, float posz = 0.0, float rotX = 0.0, float rotY = 0.0, float rotZ = 0.0,float scX = 1.0, float scY = 1.0, float scZ=1.0);
 
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // modelling transform
-float rotateAngle_X = 0.0;
-float rotateAngle_Y = 0.0;
-float rotateAngle_Z = 0.0;
+float rotateAngle_X = 45.0;
+float rotateAngle_Y = 45.0;
+float rotateAngle_Z = 45.0;
 float rotateAxis_X = 0.0;
 float rotateAxis_Y = 0.0;
 float rotateAxis_Z = 1.0;
@@ -221,11 +221,7 @@ int main()
 
         // Modelling Transformation
         glm::mat4 identityMatrix = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-        drawCube(ourShader, VAO, identityMatrix, translate_X - 1.0f, translate_Y-.10, translate_Z, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X * .2, scale_Y*.5, scale_Z*.15);
-        drawCube(ourShader, VAO, identityMatrix, translate_X + 0.7f, translate_Y - .10, translate_Z+0.2, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X * .2, scale_Y * .45, scale_Z * .15);
-        drawCube(ourShader, VAO, identityMatrix, translate_X, translate_Y-.25, translate_Z, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X*5.0, scale_Y*0.125, scale_Z*2.0);
-        drawCube(ourShader, VAO, identityMatrix, translate_X, translate_Y, translate_Z, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X, scale_Y, scale_Z*0.02); // monitor
-        drawCube(ourShader, VAO, identityMatrix, translate_X+0.5f, translate_Y, translate_Z, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X*.5, scale_Y, scale_Z); // pc
+        drawCube(ourShader, VAO, identityMatrix, translate_X, translate_Y, translate_Z, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X, scale_Y, scale_Z);
 
         // render boxes
         //for (unsigned int i = 0; i < 10; i++)
@@ -263,13 +259,12 @@ void processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) translate_X += 0.001;
-    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) translate_X -= 0.001;
-    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) translate_Y += 0.001;
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) translate_Y -= 0.001;
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) translate_Z += 0.001;
-    if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) translate_Z -= 0.001;
-
+    if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) translate_Y += 0.01;
+    if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) translate_Y -= 0.01;
+    if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) translate_X += 0.01;
+    if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) translate_X -= 0.01;
+    if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) translate_Z += 0.01;
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) translate_Z -= 0.01;
     if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) scale_X += 0.01;
     if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) scale_X -= 0.01;
     if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS) scale_Y += 0.01;
@@ -382,7 +377,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
     basic_camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
 
-void drawCube(Shader shaderProgram, unsigned int VAO, glm::mat4 parentTrans, float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float scX, float scY, float scZ)
+void drawCube(Shader shaderProgram, unsigned int VAO, glm::mat4 parentTrans, float posX, float posY, float posZ, float rotX , float rotY, float rotZ, float scX, float scY, float scZ)
 {
     shaderProgram.use();
 
